@@ -1,0 +1,58 @@
+kubermatic
+
+1 cluster [ one Master Node, many worker Nodes, Also install all required softwares and services]
+2. kubectl [ command line to send instructions to kuberneties]
+
+kubectl ( Like prim minister )
+Master node ( Like Armi generals)
+wirker Nodes ( Like Armi solders )
+
+-> first start docker desktop software
+
+-> minikube start --driver=docker
+-> minikube dashboard
+
+
+
+Kuberneties works with Objects [ pods, deployments, services, volume, other.... ]
+
+Note: Pods are designed to be ephemanral: Kuberneties will start, stop and replace then as per needs. When pods will distroyed then all data will be lost.
+
+Objects:
+ 1. Pods [ controls container ]
+ 2. Deployment [ can controls multiple pods. ]
+		-> We can set the desigred state. Kuberneties then change the actual state.
+		-> Deployment can paused, delete and rolled back.
+		-> Deployment can be scaled dynamically ( and automatically)
+ 3. Service [ Expose pods to the cluster or externally. Without service, Pods are very hard to reach and communication is very dificult. ]
+		-> Pods have internal ip address by default- It change when it replaced. ( Finding Pods is very hard if the IP changes all the time. )
+		-> Services group pods with a shared Ip.
+		-> Services can allow external access to Pods. (The default ( internal only ) can overwritten)
+		
+		
+		
+		
+		commands:------------------------------------------------------------------------------------------------------------
+		1. create deployment second-app --image=kub-first-app
+		2. kubectl get deployments
+		3. kubectl get pods
+		4. kubectl delete deployment second-app
+		5. docker tag kub-first-app 27anujsharma/kube-first-app
+		6. docker push 27anujsharma/kube-first-app
+		7. kubectl create deployment second-app --image=27anujsharma/kube-first-app:latest
+		8. kubectl expose deployment second-app --type=LoadBalancer --port=8000
+		9. kubectl get services
+		10.minikube service second-app [ only for local system. In cloud diffrent ip address or domain will be use.]
+		11.kubectl scale deployment/second-app --replicas=3
+		
+		
+		12. docker build -t 27anujsharma/kube-app .
+		13. docker push 27anujsharma/kube-app
+		13. kubectl set image deployment/second-app kub-first-app=27anujsharma/kube-app [ If the changes in code will not reflect on browser then somtime need to chang the tag like "docker build -t 27anujsharma/kube-app:2 ."]
+		14. kubectl rollout status deployment/second-app
+		15. kubctl rollout undo deployment/second-app
+		16.  kubectl rollout history deployment/second-app [ check all history of rollout updates]
+		17. kubectl rollout history deployment/second-app --revision=3 [ we can get all detail of specific history]
+		18. kubectl rollout undo deployment/second-app --to-revision=3 [ can undo to perticuller rollout in history]
+		19. kubectl delete service second-app [ delete service]
+		20. kubectl delete deployment second-app [ delete deployment]
