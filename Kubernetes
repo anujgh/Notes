@@ -32,7 +32,7 @@ Objects:
 		
 		
 		
-		commands:------------------------------------------------------------------------------------------------------------
+		commands:
 		1. create deployment second-app --image=kub-first-app
 		2. kubectl get deployments
 		3. kubectl get pods
@@ -56,3 +56,9 @@ Objects:
 		18. kubectl rollout undo deployment/second-app --to-revision=3 [ can undo to perticuller rollout in history]
 		19. kubectl delete service second-app [ delete service]
 		20. kubectl delete deployment second-app [ delete deployment]
+		
+	
+		Kubectl file commands:
+		21. kubectl apply -f .\kubeDeployment.yaml
+		22. kubectl delete -f .\kubeDeployment.yaml -f  .\kubeService.yaml [ This command will not delete files, but it deletes all resourced created by these files.]
+		23. kubectl delete deployments,services -l group=forDelete
