@@ -1,0 +1,53 @@
+docker run hello-world
+docker run -it ubuntu
+docker run -it -p <outer machin port no>:<docker port no> <image name>
+exit
+docker stop <container id / container name>
+docker start <container name / container id>
+docker container ls
+docker container ls -a
+docker images
+docker exec -it <initial part of container id> bash
+
+docker build --no-cache -t story_vol .
+docker build -t <image name>
+docker login
+docker push
+
+sudo docker compose up
+sudo docker compose down
+docker compose -up -d
+-------------------------------------------
+
+docker network inspact bridge
+docker network ls
+docker run -it --network=host busybox
+docker run -it --network=none busybox
+docker network create -d bridge youtube [create your own network]
+docker run -it --network=youtube --name tony_stark ubuntu
+docker run -it --network=youtube --name dr_strange busybox
+docker run -it -v /Users/abcuser/Desktop/test-folder: /home/abc ubuntu
+
+
+--------------------------------------------
+
+FROM ubuntu
+
+RUN apt-get update
+RUN apt-get install -y curl
+RUN curl -sL https://dev.nodesource.com/setup_18.x | bash -
+RUN apt-get upgrade -y
+RUN apt-get install -y nodejs
+
+WORKERDIR /app
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
+RUN npm install
+
+COPY main.js main.js :[alternate COPPY .. and also use .dockerignore]
+
+
+
+ENTRYPOINT ["node", "main.js"]
